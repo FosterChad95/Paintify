@@ -1,5 +1,5 @@
 import Commerce from "@chec/commerce.js";
 
 export const commerce = new Commerce(
-  "pk_2765353a4adfd42a887cbf9f25a66119874bc10cb4233"
+  "pk_test_2765350dc26be8230d1a8b5f09363ac27de1c4d1266ce"
 );

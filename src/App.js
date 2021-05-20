@@ -54,6 +54,7 @@ const App = () => {
         checkoutTokenId,
         newOrder
       );
+      console.log(incomingOrder);
       setOrder(incomingOrder);
       refreshCart();
     } catch (error) {

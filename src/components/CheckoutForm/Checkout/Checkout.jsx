@@ -3,17 +3,18 @@ import useStyles from "./styles";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
 import { commerce } from "../../../lib/commerce";
+import { Link } from "react-router-dom";
 import {
   Paper,
   Stepper,
   Step,
   StepLabel,
   Typography,
-  // CircularProgress,
-  // Divider,
-  // Button,
+  Divider,
+  CircularProgress,
+  Button,
 } from "@material-ui/core";
-// import Cart from "../../Cart/Cart";
+import Cart from "../../Cart/Cart";
 const steps = ["Shipping Address", "Payment details"];
 
 const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
@@ -30,7 +31,9 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         });
 
         setCheckoutToken(token);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     generateToken();
@@ -44,8 +47,41 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     nextStep();
   };
 
-  const Confirmation = () => <div>Confirmation</div>;
+  let Confirmation = () =>
+    order.customer ? (
+      <>
+        <div>
+          <Typography variant="h5">
+            Thank you for your purchase, {order.customer.firstname}{" "}
+            {order.customer.lastname}!
+          </Typography>
+          <Divider className={classes.divider} />
+          <Typography variant="subtitle2">
+            Order ref: {order.customer_reference}
+          </Typography>
+        </div>
+        <br />
+        <Button component={Link} variant="outlined" type="button" to="/">
+          Back to home
+        </Button>
+      </>
+    ) : (
+      <div className={classes.spinner}>
+        <CircularProgress />
+      </div>
+    );
 
+  if (error) {
+    Confirmation = () => (
+      <>
+        <Typography variant="h5">Error: {error}</Typography>
+        <br />
+        <Button component={Link} variant="outlined" type="button" to="/">
+          Back to home
+        </Button>
+      </>
+    );
+  }
   const Form = () =>
     activeStep === 0 ? (
       <AddressForm checkoutToken={checkoutToken} next={next} />

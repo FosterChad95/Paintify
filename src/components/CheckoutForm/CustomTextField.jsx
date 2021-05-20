@@ -4,7 +4,7 @@ import { TextField, Grid } from "@material-ui/core";
 
 function FormInput({ name, label }) {
   const { control } = useFormContext();
-  const isError = false;
+  // const isError = false;
 
   return (
     <Grid item xs={12} sm={6}>

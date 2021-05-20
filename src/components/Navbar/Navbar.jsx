@@ -4,8 +4,8 @@ import {
   Toolbar,
   IconButton,
   Badge,
-  MenuItem,
-  Menu,
+  // MenuItem,
+  // Menu,
   Typography,
 } from "@material-ui/core";
 import logo from "../../assets/shops.png";

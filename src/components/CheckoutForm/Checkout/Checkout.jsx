@@ -9,11 +9,11 @@ import {
   Step,
   StepLabel,
   Typography,
-  CircularProgress,
-  Divider,
-  Button,
+  // CircularProgress,
+  // Divider,
+  // Button,
 } from "@material-ui/core";
-import Cart from "../../Cart/Cart";
+// import Cart from "../../Cart/Cart";
 const steps = ["Shipping Address", "Payment details"];
 
 const Checkout = ({ cart, order, onCaptureCheckout, error }) => {

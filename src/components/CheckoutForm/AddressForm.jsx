@@ -51,7 +51,7 @@ const AddressForm = ({ checkoutToken, next }) => {
     );
 
     setShippingOptions(options);
-    console.log(options);
+    if (!options[0]) return;
     setShippingOption(options[0].id);
   };
 
@@ -72,6 +72,8 @@ const AddressForm = ({ checkoutToken, next }) => {
       );
     }
   }, [shippingSubdivision, shippingCountry, checkoutToken.id]);
+
+  console.log(shippingCountry);
 
   return (
     <>
@@ -135,16 +137,20 @@ const AddressForm = ({ checkoutToken, next }) => {
                 fullWidth
                 onChange={(e) => setShippingOption(e.target.value)}
               >
-                {shippingOptions
-                  .map((sO) => ({
-                    id: sO.id,
-                    label: `${sO.description} - (${sO.price.formatted_with_symbol})`,
-                  }))
-                  .map((item) => (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.label}
-                    </MenuItem>
-                  ))}
+                {shippingCountry === "US" ? (
+                  <MenuItem value="Domestic">Domestic - ($0.00)</MenuItem>
+                ) : (
+                  shippingOptions
+                    .map((sO) => ({
+                      id: sO.id,
+                      label: `${sO.description} - (${sO.price.formatted_with_symbol})`,
+                    }))
+                    .map((item) => (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.label}
+                      </MenuItem>
+                    ))
+                )}
               </Select>
             </Grid>
           </Grid>
